@@ -79,6 +79,17 @@ test('it supports DOM events', function() {
   equal(this.$('.value').text(), '1');
 });
 
+test('it supports updating an input', function() {
+  setResolverRegistry({
+    'component:my-input': Ember.TextArea.extend({
+      value: null
+    })
+  });
+  this.render('{{my-input value=value}}');
+  this.$('input').val('1').change();
+  equal(this.get('value'), '1');
+});
+
 moduleForComponent('Component Integration Tests: render during setup', {
   integration: true,
   beforeSetup: function() {
